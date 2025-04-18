@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify
 import random
 import os
@@ -37,12 +36,13 @@ def handle_message():
     else:
         return jsonify(text="Say 'soft', 'tease', or 'deep'. Or type /vip if you’re ready for more.")
 
-if __name__ == '__main__':
-    print("🚀 NovaTelegram_VIP webhook running on port 5055")
-    app.run(port=5055)
-
 @app.route("/hook", methods=["POST"])
 def telegram_webhook():
     update = request.get_json()
     print("Received update:", update)
     return jsonify({"ok": True})
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5055))
+    print(f"🚀 NovaTelegram_VIP webhook running on port {port}")
+    app.run(host="0.0.0.0", port=port)
