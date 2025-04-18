@@ -1,0 +1,12 @@
+ services:
+  - type: web
+    name: nova-telegram-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python telegram_handler.py
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        fromEnvVar: TELEGRAM_BOT_TOKEN
+      - key: VIP_STATUS_ENDPOINT
+        value: http://localhost:5000/vip/status
